@@ -1,0 +1,292 @@
+$viacomblue: #1CB6EA
+$lightpurple: #95B0CC
+$gray0: #F3F6F9
+$gray1: #E6EDF1
+$gray2: #DBE6EC
+$gray3: #879BA9
+$gray4: #5F6770
+$gray5: #35383B
+
+=unselectable
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+.datepicker-label
+  font-family: Roboto
+  font-weight: 500
+  font-size: 14px
+  text-align: left
+
+.error-message
+  color: red
+
+.datepicker-container
+  display: inline-block
+  position: relative
+
+  .datepicker-input-container
+    border: 1px solid $gray5
+    display: inline-block
+    height: 44px
+    background: $gray0
+
+    &.error
+      border: 1px solid red
+
+    &:active
+      border: solid 1px $gray3
+
+    .datepicker-input
+      display: inline-block
+      width: 140px
+      margin: 11px 0 0 10px
+      border: none
+      outline: none
+      font-family: Roboto
+      font-size: 16px
+      font-weight: regular
+      color: $gray3
+      background: $gray0
+      text-align: left
+
+    .datepicker-input-icon
+      float: right
+      font-size: 18px
+      margin: 13px 13px 0px 0px
+      display: inline-block
+      color: $gray3
+      i
+        cursor: pointer
+
+  .datepicker-calendar
+    +unselectable
+    width: 250px
+    top: 55px
+    position: absolute
+    z-index: 99
+    background: white
+    border-bottom-left-radius: 4px
+    border-bottom-right-radius: 4px
+    outline: 1px solid $gray5
+    margin-top: 25px
+
+    .datepicker-calendar-top
+      width: 100%
+      height: 80px
+      background: black
+      display: inline-block
+      position: relative
+
+      button
+        width: 200px
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        display: block
+        margin: 0 auto
+        color: white
+        text-transform: uppercase
+        background: transparent
+        border: none
+        outline: none
+        font-size: 12px
+        font-family: Roboto
+        cursor: pointer
+        position: relative
+
+        svg
+          display: block
+          float: left
+          width: 15px
+          height: 15px
+          position: absolute
+          top: 2px
+          left: 12px
+          g
+            fill: white
+            path
+              fill: white
+
+      .close
+        position: absolute
+        top: 5px
+        right: 5px
+        font-size: 20px
+        color: white
+        cursor: pointer
+
+        svg
+          width: 12px
+          height: 12px
+          g
+            path
+              fill: white
+
+    .datepicker-calendar-container:after,.datepicker-calendar-container:before
+      bottom: 100%
+      left: 10%
+      border: solid transparent
+      content: " "
+      height: 0
+      width: 0
+      position: absolute
+      pointer-events: none
+
+    .datepicker-calendar-container:after
+    	border-color: rgba(255, 255, 255, 0)
+    	border-bottom-color: $gray0
+    	border-width: 5px
+    	margin-left: -5px
+
+    .datepicker-calendar-container:before
+    	border-color: rgba(194, 225, 245, 0)
+    	border-bottom-color: $gray5
+    	border-width: 6px
+    	margin-left: -6px
+
+    .datepicker-calendar-container
+      display: inline-block
+      width: 100%
+      padding: 10px
+      background: $gray0
+
+      .datepicker-calendar-month-section
+        width: 100%
+        display: flex
+        justify-content: space-between
+        font-size: 14px
+        font-family: Roboto
+        color: $gray5
+        text-transform: uppercase
+        i
+          cursor: pointer
+          &:first-child
+            margin-left: 12px
+          &:last-child
+            margin-right: 12px
+
+      .datepicker-calendar-day-names
+        width: 230px
+        margin-top: 10px
+        display: inline-block
+        border: 1px solid transparent
+
+        span
+          font-size: 12px
+          font-family: Roboto
+          display: block
+          float: left
+          width: calc(100% / 7)
+          text-align: center
+
+      .datepicker-calendar-days-container
+        width: 230px
+        margin-top: 5px
+        display: inline-block
+        border: 1px solid transparent
+
+        .day
+          display: flex
+          justify-content: center
+          align-items: center
+          float: left
+          font-size: 14px
+          color: $gray5
+          background: $gray2
+          border: 1px solid $gray0
+          width: calc(100% / 7)
+          height: 33px
+          text-align: center
+          cursor: pointer
+          &.today
+            background: $lightpurple
+            color: $gray0
+          &:hover:not(.disabled), &.selected
+            background: $viacomblue
+            color: $gray0
+          &.different-month
+            color: $gray4
+            background-color: $gray1
+          &.disabled
+            color: white
+            pointer-events: none
+            background: linear-gradient(to top left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 0.8px), rgba(255,255,255,1) 50%, rgba(0,0,0,0) calc(50% + 0.8px), rgba(0,0,0,0) 100%)
+            background-color: $gray1
+
+
+      .datepicker-calendar-years-container
+        width: 100%
+        height: 240px
+
+        .year
+          display: flex
+          justify-content: center
+          align-items: center
+          float: left
+          font-size: 14px
+          color: #8E8E8E
+          width: calc(100% / 4)
+          height: 50px
+          text-align: center
+          border-radius: 50%
+          cursor: pointer
+          &:hover, &.selected
+            background: #222628
+            border: 1px solid #366AAB
+            border-radius: 4px
+
+      .datepicker-buttons
+        width: 235px
+        display: flex
+        justify-content: center
+
+        button
+          width: 40%
+          outline: none
+          display: inline-block
+          border: 1px solid blue
+          background: #099268
+          color: white
+          margin-right: 5px
+          border-radius: 5px
+          cursor: pointer
+          text-align: center
+          padding: 5px 10px
+          border: 1px solid #366AAB
+          border-radius: 4px
+          font-family: Roboto
+
+          &.u-is-primary
+            background: #366AAB
+            &:active
+              background: #222628
+
+          &.u-is-secondary
+            background: #222628
+            color: #099268
+            &:active
+              background: #366AAB
+              color: #DDDDDD
+            &:hover
+              color: #FFFFFF
+  svg
+    display: block
+    width: 20px
+    height: 20px
+    g
+      fill: white
+      g
+        fill: white
+
+input
+  &::-webkit-input-placeholder /* WebKit, Blink, Edge */
+     color: $gray4 !important
+  &:-moz-placeholder /* Mozilla Firefox 4 to 18 */
+     color: $gray4 !important
+  &::-moz-placeholder /* Mozilla Firefox 19+ */
+     color: $gray4 !important
+  &:-ms-input-placeholder /* Internet Explorer 10-11 */.DS_Store
+     color: $gray4 !important

@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="datepicker-container u-is-unselectable">
+  <div class="datepicker-label">
+    {{options.label}}
+  </div>
+  <div class="datepicker-input-container"
+       [ngStyle]="{'width': options.width + 'px'}"
+       [ngClass]="{'error': error}"
+  >
+    <input #input type="text"
+          class="datepicker-input"
+          [(ngModel)]="date.formatted"
+          [ngStyle]="{'width': (options.width - 65) + 'px'}"
+          placeholder={{options.format}}
+          (keyup.enter)="enterDate()"
+    >
+    <div class="datepicker-input-icon" (click)="toggle()">
+      <i class="fa fa-calendar"></i>
+      <i *ngIf="!opened" class="fa fa-caret-down"></i>
+      <i *ngIf="opened" class="fa fa-caret-up"></i>
+    </div>
+  </div>
+  <div class="error-message" *ngIf="error">
+    {{errorMessage}}
+  </div>
+  <div class="datepicker-calendar" *ngIf="opened">
+    <div class="datepicker-calendar-container">
+      <div class="datepicker-calendar-month-section">
+        <i class="fa fa-angle-double-left fa-lg" (click)="prevYear()"></i>
+        <i class="fa fa-angle-left fa-lg" (click)="prevMonth()"></i>
+        <span class="month-title">{{ currentDate.format('MMMM YYYY') }}</span>
+        <i class="fa fa-angle-right fa-lg" (click)="nextMonth()"></i>
+        <i class="fa fa-angle-double-right fa-lg" (click)="nextYear()"></i>
+      </div>
+      <div class="datepicker-calendar-days-container">
+        <span class="day" *ngFor="let d of days; let i = index"
+                          (click)="selectDate($event, d.momentObj)"
+                          [ngClass]="{ 'disabled': !d.enabled,
+                                       'today': d.today,
+                                       'selected': d.selected || selectRange
+                                                              && d.momentObj.isAfter(getPreviousDay(minDate), 'day')
+                                                              && d.momentObj.isBefore(value.momentObj, 'day'), 'different-month':d.differentMonth }"
+        >
+          {{ d.day }}
+        </span>
+      </div>
+      <div class="datepicker-buttons" *ngIf="!options.autoApply">
+        <button type="button" class="a-button u-is-primary u-is-small" (click)="today()">{{options.todayText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
